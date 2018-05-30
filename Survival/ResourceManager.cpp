@@ -21,10 +21,7 @@ void ResourceManager::LoadTextures(int _id, const std::string &_path){
 	Textures.insert(std::make_pair(_id, newOne));
 }
 
-sf::Texture * ResourceManager::getTexture(int _id) {
-	for (auto& t : Textures) {
-		if (t.first == _id)
-			return t.second;
-	}
+sf::Texture& ResourceManager::getTexture(int _id) {
+	return *Textures.at(_id);
 }
 

@@ -7,8 +7,8 @@ MainMenu::MainMenu(Engine* _menu) {
 	sf::Vector2f position = static_cast<sf::Vector2f>(engine->window.getSize());
 	std::cout << "Wchodze do menu...";
 	textures = new ResourceManager();
-	std::cout << "OUTSIDE "<<&(*textures->getTexture(1)) << "\n";
-	test.setTexture(*textures->getTexture(1));
+	std::cout << "OUTSIDE "<<&(textures->getTexture(1)) << "\n";
+	test.setTexture(textures->getTexture(1));
 }
 
 void MainMenu::inputs() {
