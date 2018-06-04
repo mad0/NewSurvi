@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <memory>
 #include <SFML/Graphics.hpp>
 
 namespace Textures {
@@ -8,11 +9,14 @@ namespace Textures {
 
 class ResourceManager {
 private:
-	std::map<int, sf::Texture*> Textures;
+	template <typename T>
+	static std::map<int, T*> res;
 public:
 	ResourceManager();
 	~ResourceManager();
-	void LoadTextures(int, const std::string&);
-	sf::Texture& getTexture(int);
+	template<typename T>
+	void Load(int, const std::string&);
+	template<typename T>
+	T& Get(int);
 };
 
