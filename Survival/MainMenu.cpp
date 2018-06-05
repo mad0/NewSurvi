@@ -8,7 +8,7 @@ MainMenu::MainMenu(Engine* _menu) {
 	std::cout << "Wchodze do menu...";
 	//resources = std::move(std::make_unique<ResourceManager>());
 	//resources->Load<sf::Texture>(1, "gfx/banana.png");
-	ResourceManager res;
+	ResourceManager<sf::Texture> res;
 
 	//std::cout << "OUTSIDE "<<&(resources->getTexture(2))<< "\n";
 	//test.setTexture(resources.Get(1));
