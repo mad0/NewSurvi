@@ -3,7 +3,8 @@
 
 ResourceManager::ResourceManager() {
 	Load<sf::Texture>(1, "gfx/banana.png");
-	Load<sf::Texture>(2, "gfx/dagger.png");
+	//Load<sf::Texture>
+	//Load<sf::Texture>(2, "gfx/dagger.png");
 	//std::cout << "Loaded textures: " << Resources.size() << "\n";
 	//std::cout << &(*Textures.at(2))<< "\n";
 }
@@ -11,17 +12,20 @@ ResourceManager::ResourceManager() {
 ResourceManager::~ResourceManager() {
 	
 }
-template<typename T>
-void ResourceManager::Load(int _id, const std::string &_path){
-	//auto newOne = std::make_unique<T>(T());
-	T *newOne = new T();
-	newOne->loadFromFile(_path);
-	//res.insert(std::make_pair(_id, std::move(newOne)));
-	res.insert(_id, <T>newOne);
-}
 
 template<typename T>
-T& ResourceManager::Get(int _id) {
-		return *res.at(_id);
+void ResourceManager::Load(int _id, const std::string &_path){
+	//auto newOne = std::make_unique<T>();
+	std::cout << "ODPALAM";
+	//auto newOne = std::make_unique<T>(_id, _path);
+	std::unique_ptr<T> newOne(new T());
+	//T *newOne = new T();
+	newOne->loadFromFile(_path);
+	res.insert(std::make_pair(_id, std::move(newOne)));
 }
+
+//template<typename T>
+//T& ResourceManager<T>::Get(int _id) {
+//		return *res.at(_id);
+//}
 

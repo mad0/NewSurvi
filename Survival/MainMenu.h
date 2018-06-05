@@ -9,7 +9,8 @@ class MainMenu : public GameState {
 private:
 	std::vector<std::string> mTxt;
 	sf::Sprite test;
-	std::unique_ptr<ResourceManager> resources;
+	//std::unique_ptr<ResourceManager> resources;
+	//ResourceManager res;
 public:
 	MainMenu(Engine* _menu);
 	~MainMenu();

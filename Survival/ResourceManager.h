@@ -9,14 +9,13 @@ namespace Textures {
 
 class ResourceManager {
 private:
-	template <typename T>
-	static std::map<int, T*> res;
+	template<typename T>
+	static std::map<int, std::unique_ptr<T >> res;
 public:
 	ResourceManager();
 	~ResourceManager();
 	template<typename T>
 	void Load(int, const std::string&);
-	template<typename T>
-	T& Get(int);
+	//T& Get(int);
 };
 
