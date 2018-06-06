@@ -5,10 +5,14 @@
 MainMenu::MainMenu(Engine* _menu) {
 	engine = _menu;
 	sf::Vector2f position = static_cast<sf::Vector2f>(engine->window.getSize());
-	std::cout << "Wchodze do menu...";
+	std::cout << "Wchodze do menu...\n";
 	//resources = std::move(std::make_unique<ResourceManager>());
 	//resources->Load<sf::Texture>(1, "gfx/banana.png");
-	ResourceManager<sf::Texture> res;
+	//ResourceManager<sf::Texture> res;
+	ResourceManager <sf::Texture>textures;
+	//textures.Load(1, "gfx/banana.png");
+	//ResourceManager <sf::Font>texts;
+	//texts.Load(1, "fdfdfd");
 
 	//std::cout << "OUTSIDE "<<&(resources->getTexture(2))<< "\n";
 	//test.setTexture(resources.Get(1));
