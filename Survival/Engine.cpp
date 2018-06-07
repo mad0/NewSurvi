@@ -8,8 +8,6 @@ Engine::Engine() {
 	window.setFramerateLimit(60);
 	window.setVerticalSyncEnabled(true);
 	window.setKeyRepeatEnabled(true);
-	
-
 }
 
 void Engine::setState(GameState* stan) {

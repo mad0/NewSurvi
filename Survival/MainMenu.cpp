@@ -2,18 +2,23 @@
 #include "MainMenu.h"
 
 
-MainMenu::MainMenu(Engine* _menu) {
+MainMenu::MainMenu(Engine* _menu)  {
 	engine = _menu;
 	sf::Vector2f position = static_cast<sf::Vector2f>(engine->window.getSize());
 	std::cout << "Wchodze do menu...\n";
+	menuFont.loadFromFile("fonts/Game2.ttf");
+	menuString = { "NEW", "OPTIONS", "EXIT" };
+	for (int x=0;x<menuString.size();x++) {
+		menuText.emplace_back(sf::Text(menuString[x], menuFont, 15));
+		menuText[x].setPosition(position.x / 2 - menuText[x].getGlobalBounds().width / 2, position.y / 4 + x * 130);
+	}
+		
 	//resources = std::move(std::make_unique<ResourceManager>());
 	//resources->Load<sf::Texture>(1, "gfx/banana.png");
 	//ResourceManager<sf::Texture> res;
-	ResourceManager <sf::Texture>textures;
 	//textures.Load(1, "gfx/banana.png");
 	//ResourceManager <sf::Font>texts;
 	//texts.Load(1, "fdfdfd");
-
 	//std::cout << "OUTSIDE "<<&(resources->getTexture(2))<< "\n";
 	//test.setTexture(resources.Get(1));
 }
@@ -30,28 +35,26 @@ void MainMenu::inputs() {
 				else if ((zdarz.type == sf::Event::KeyReleased) && (zdarz.key.code == sf::Keyboard::N)) {
 	
 				}
-				//else if ((mItems[0]->GetSize().contains(mouse)) && (zdarz.type == sf::Event::MouseButtonReleased) && (zdarz.key.code == sf::Mouse::Left)) {
-				//	engine->setState(new Game(engine));
-				//}
-				//else if ((mItems[2]->GetSize().contains(mouse)) && (zdarz.type == sf::Event::MouseButtonReleased) && (zdarz.key.code == sf::Mouse::Left))
-					//engine->window.close();
+				else if ((menuText[0].getGlobalBounds().contains(mouse)) && (zdarz.type == sf::Event::MouseButtonReleased) && (zdarz.key.code == sf::Mouse::Left)) {
+					//engine->setState(new Game(engine));
+					std::cout << "DUPA\n";
+				}
+				else if ((menuText[2].getGlobalBounds().contains(mouse)) && (zdarz.type == sf::Event::MouseButtonReleased) && (zdarz.key.code == sf::Mouse::Left))
+					engine->window.close();
 			}
-			//for (int x = 0; x < 3; x++) {
-				//if (mItems[x]->GetSize().contains(mouse))
-				//	mItems[x]->setColor(sf::Color::Red);
-				//else
-				//	mItems[x]->setColor(sf::Color::White);
-			//}
+			for (auto& m : menuText) {
+				if (m.getGlobalBounds().contains(mouse))
+					m.setFillColor(sf::Color::Red);
+				else
+					m.setFillColor(sf::Color::White);
+			}
 }
 
 void MainMenu::draw() {
 	engine->window.clear(sf::Color::Black);
-	engine->window.draw(test);
+	for (const auto& m : menuText)
+		engine->window.draw(m);
 	engine->window.display();
-
-	//rend->drawText();
-	//for (auto& p : mItems)
-	//	p->draw(engine->window);
 }
 
 void MainMenu::update() {
