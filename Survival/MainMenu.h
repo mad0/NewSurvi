@@ -11,7 +11,7 @@ private:
 	std::vector<sf::Text> menuText;
 	sf::Font menuFont;
 public:
-	MainMenu(Engine* _menu);
+	MainMenu(Engine &_menu);
 	~MainMenu();
 	virtual void inputs();
 	virtual void update();

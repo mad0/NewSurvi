@@ -2,8 +2,8 @@
 #include "MainMenu.h"
 
 
-MainMenu::MainMenu(Engine* _menu)  {
-	engine = _menu;
+MainMenu::MainMenu(Engine &_menu)  {
+	engine = &_menu;
 	sf::Vector2f position = static_cast<sf::Vector2f>(engine->window.getSize());
 	std::cout << "Wchodze do menu...\n";
 	menuFont.loadFromFile("fonts/Game2.ttf");
