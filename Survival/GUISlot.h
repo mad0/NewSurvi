@@ -1,16 +1,22 @@
 #pragma once
 #include <SFML\Graphics.hpp>
-#include "Items.h"
 
 class GUISlot {
 private:
 	bool empty;
 	sf::RectangleShape slot;
-	Items *slotItem;
+	//Items *slotItem;
 public:
 	GUISlot();
 	~GUISlot();
 	void setPosition(int, int);
 	void draw();
+};
+
+class GUISlot
+{
+public:
+	GUISlot();
+	~GUISlot();
 };
 

@@ -1,16 +1,16 @@
 #include <iostream>
 #include "MainMenu.h"
-
+#include "Game.h"
 
 MainMenu::MainMenu(Engine &_menu)  {
 	engine = &_menu;
 	sf::Vector2f position = static_cast<sf::Vector2f>(engine->window.getSize());
 	std::cout << "Wchodze do menu...\n";
-	menuFont.loadFromFile("fonts/Game2.ttf");
+	menuFont.loadFromFile("fonts/CGA.ttf");
 	menuString = { "NEW", "OPTIONS", "EXIT" };
 	for (int x=0;x<menuString.size();x++) {
-		menuText.emplace_back(sf::Text(menuString[x], menuFont, 15));
-		menuText[x].setPosition(position.x / 2 - menuText[x].getGlobalBounds().width / 2, position.y / 4 + x * 130);
+		menuText.emplace_back(sf::Text(menuString[x], menuFont, 31));
+		menuText[x].setPosition(position.x / 2 - menuText[x].getGlobalBounds().width / 2, position.y / 3 + x * 115);
 	}
 		
 	//resources = std::move(std::make_unique<ResourceManager>());
@@ -36,7 +36,7 @@ void MainMenu::inputs() {
 	
 				}
 				else if ((menuText[0].getGlobalBounds().contains(mouse)) && (zdarz.type == sf::Event::MouseButtonReleased) && (zdarz.key.code == sf::Mouse::Left)) {
-					//engine->setState(new Game(engine));
+					engine->setState(new Game(*engine));
 					std::cout << "DUPA\n";
 				}
 				else if ((menuText[2].getGlobalBounds().contains(mouse)) && (zdarz.type == sf::Event::MouseButtonReleased) && (zdarz.key.code == sf::Mouse::Left))

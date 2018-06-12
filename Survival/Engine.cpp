@@ -4,7 +4,8 @@
 
 Engine::Engine() {
 	std::cout << "Uruchamiam ENGINE...\n";
-	window.create(sf::VideoMode(1280, 720), "Ice Syrvival - Alpha 0.0.01", sf::Style::Default);
+	sf::VideoMode desktop = sf::VideoMode().getDesktopMode();
+	window.create(desktop, "Ice Syrvival - Alpha 0.0.01", sf::Style::Default);
 	window.setFramerateLimit(60);
 	window.setVerticalSyncEnabled(true);
 	window.setKeyRepeatEnabled(true);
