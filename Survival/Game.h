@@ -2,6 +2,7 @@
 #include "GameState.h"
 #include "Map.h"
 #include "Character.h"
+#include <memory>
 
 //class Engine;
 

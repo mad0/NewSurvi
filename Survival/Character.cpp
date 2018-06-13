@@ -6,7 +6,7 @@ Character::Character() {
 	hp = 100;
 	_maxHP = hp;
 	points = 0;
-	playerTexture.loadFromFile("gfx/player.png");
+	playerTexture.loadFromFile("gfx/pLeft.png");
 	player.setTexture(playerTexture);
 	font.loadFromFile("fonts/CGA.ttf");
 	strings = { "Points:", "Health points:" };

@@ -7,6 +7,7 @@
 namespace Textures {
 	enum ID {Food, Potion, Weapon, Armor};
 }
+
 template <typename T>
 class ResourceManager {
 private:
@@ -19,8 +20,7 @@ public:
 };
 template <typename T>
 inline ResourceManager<T>::ResourceManager() {
-	//std::cout << typeid(T).name();
-	Load(1, "fdfdfd");
+
 }
 
 template<typename T>
