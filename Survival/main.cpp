@@ -5,7 +5,7 @@
 
 int main() {
 	Engine start;
-	start.setState(new MainMenu(&start));
+	start.setState(new MainMenu(start));
 	start.mainLoop();
 return 0;
 };
