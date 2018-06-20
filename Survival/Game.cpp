@@ -51,7 +51,7 @@ void Game::inputs() {
 
 void Game::update() {
 	//player->setPosition(mapa.startPosition());
-	player->update();
+	//player->update();
 	//std::random_device random;
 	//std::mt19937_64 mt(random());
 	//std::uniform_int_distribution<>rnd(1, 1280);

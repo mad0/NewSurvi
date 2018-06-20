@@ -3,6 +3,7 @@
 
 class Character {
 private:
+	bool isAlive;
 	int hp;
 	int _maxHP;
 	int points;

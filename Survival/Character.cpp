@@ -3,6 +3,7 @@
 #include "Game.h"
 
 Character::Character() {
+	isAlive = true;
 	hp = 100;
 	_maxHP = hp;
 	points = 0;

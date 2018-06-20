@@ -2,26 +2,25 @@
 #include <iostream>
 
 
-Map::Map() : oneBox(sf::LineStrip, 5) {
+Map::Map() : oneBox(sf::Quads, 4) {
 	std::cout << "Map size: " << mapCoords.size() << "\n";
 	font.loadFromFile("fonts/CGA.ttf");
+	textures.loadFromFile("gfx/7.png");
 	levelName.setFont(font);
-	levelName.setPosition(sf::Vector2f(550, 250));
+	levelName.setPosition(sf::Vector2f(550, 260));
 	levelName.setCharacterSize(27);
-	mapCoords = {
-		{1,0},
-		{0,0},{0,1},{0,2},{0,3},{0,4},{0,5},{0,6},//1
-		{1,6},{2,6},{3,6},{4,6},//2
-		{4,5},{4,4},//3
-		{5,4},{6,4},
-		{6,5},{6,6},
-		{7,6},{8,6},{9,6},{10,6},
-		{10,5},{10,4},{10,3},{10,2},{10,1},//
-					{11,3},{12,3},{13,3},
-		{9,1},{8,1},{7,1},
-		{7,0}
+	mapCoords = { //15x10
+		0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,
+		0,6,0,2,2,2,2,2,2,2,2,2,2,2,2,
+		0,6,0,0,0,0,0,0,0,0,0,0,0,0,2,
+		0,6,0,0,0,0,0,2,2,2,2,2,2,0,2,
+		0,6,0,6,6,6,0,2,0,0,0,0,2,0,2,
+		0,6,0,6,0,6,0,6,6,6,0,0,2,0,2,
+		0,6,6,6,0,6,0,0,0,6,0,0,2,0,2,
+		0,0,15,0,0,6,0,0,0,6,0,0,2,0,2,
+		15,15,15,0,0,6,6,6,6,6,0,0,2,0,2,
+		15,0,0,0,0,0,0,0,0,0,0,0,2,2,2
 	};
-	std::cout << "Map size: "<<mapCoords.size()<<"\n";
 	createMap(0);
 }
 
@@ -29,20 +28,27 @@ Map::~Map() {
 }
 
 void Map::createBox() {
-	std::cout << "Map size: " << mapCoords.size() << "\n";
-	for (auto & m : mapCoords) {
-		oneBox[0].position = sf::Vector2f(550 + (50 * m.x), 300 + (50 * m.y));
-		oneBox[1].position = sf::Vector2f(600 + (50 * m.x), 300 + (50 * m.y));
-		oneBox[2].position = sf::Vector2f(600 + (50 * m.x), 350 + (50 * m.y));
-		oneBox[3].position = sf::Vector2f(550 + (50 * m.x), 350 + (50 * m.y));
-		oneBox[4].position = sf::Vector2f(550 + (50 * m.x), 300 + (50 * m.y));
-		oneBox[0].color = sf::Color::Magenta;
-		oneBox[1].color = sf::Color::Magenta;
-		oneBox[2].color = sf::Color::Magenta;
-		oneBox[3].color = sf::Color::Magenta;
-		oneBox[4].color = sf::Color::Magenta;
-		table.push_back(oneBox);
+	for (int x = 0; x < 15; x++) {
+		for (int y = 0; y < 10; y++) {
+			int textureNumber = mapCoords[x + (y * 15)];
+			if (textureNumber > 0) {
+				oneBox[0].position = sf::Vector2f(550 + (50 * x), 300 + (50 * y));
+				oneBox[1].position = sf::Vector2f(600 + (50 * x), 300 + (50 * y));
+				oneBox[2].position = sf::Vector2f(600 + (50 * x), 350 + (50 * y));
+				oneBox[3].position = sf::Vector2f(550 + (50 * x), 350 + (50 * y));
+				int tX = (textureNumber % 10)-1;
+				int tY = (textureNumber / 10);
+				std::cout << tX << " = " << tY << "\n";
+				oneBox[0].texCoords = sf::Vector2f(tX*50, tY*50);
+				oneBox[1].texCoords = sf::Vector2f((tX*50)+50, tY*50);
+				oneBox[2].texCoords = sf::Vector2f((tX*50)+50, (tY*50)+50);
+				oneBox[3].texCoords = sf::Vector2f(tX*50, (tY*50)+50);
+
+				table.push_back(oneBox);
+			}
+		}
 	}
+	std::cout << "TABLE SIZE: " << table.size() << "\n";
 }
 
 void Map::createMap(int _level)  {
@@ -52,7 +58,7 @@ void Map::createMap(int _level)  {
 
 void Map::DrawMap(sf::RenderWindow & _window) {
 	for (auto& t : table)
-		_window.draw(t);
+		_window.draw(t, &textures);
 	_window.draw(levelName);
 }
 
@@ -63,7 +69,12 @@ sf::Vector2f Map::startPosition() {
 bool Map::nextPosition(int _x, int _y) {
 	//std::cout <<"NEXT POS: "<< _x << " - " << _y-3 << "\n";
 	for (auto& t : table) {
-		if (t.getBounds().left == _x && t.getBounds().top == _y-3)
+		if (t.getBounds().left == _x && t.getBounds().top == _y - 3) {
+			t[0].color = sf::Color(255,255,255, 230);
+			t[1].color = sf::Color(255, 255,255,230);
+			t[2].color = sf::Color(255, 255,255, 230);
+			t[3].color = sf::Color(255, 255, 255, 230);
 			return true;
+		}	
 	}
 }

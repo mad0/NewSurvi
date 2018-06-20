@@ -5,7 +5,8 @@ class Map {
 private:
 	sf::VertexArray oneBox;
 	std::vector<sf::VertexArray> table;
-	std::vector<sf::Vector2f> mapCoords;
+	std::vector<int> mapCoords;
+	sf::Texture textures;
 	void createBox();
 	sf::Text levelName;
 	sf::Font font;
